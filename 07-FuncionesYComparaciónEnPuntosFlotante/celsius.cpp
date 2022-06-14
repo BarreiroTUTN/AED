@@ -1,20 +1,20 @@
 #include <cassert>
 
-float farenheitToCelsiusWithValue(float);      // f: R -> R / f(x) = (x - 32) * 0.55555555555;
-float farenheitToCelsiusWithExpression(float); // f: R -> R / f(x) = (x - 32) * 5 / 9;
+double farenheitToCelsiusWithValue(double);      // f: R -> R / f(x) = (x - 32) * 0.55555555555;
+double farenheitToCelsiusWithExpression(double); // f: R -> R / f(x) = (x - 32) * 5 / 9;
 
-bool validateTolerance(float, float, float);
+bool validateTolerance(double, double, double);
 
 int main()
 {
-    float tolerance = 0.0000001;
+    double tolerance = 0.0000001;
 
-    float farenheitValues[] = {-25, -22.5, -20, -15, -10, -5, -1, 0, 32, 40, 42.5, 45, 47.5, 50, 52.5, 55, 60, 70, 80};
+    double farenheitValues[] = {-25, -22.5, -20, -15, -10, -5, -1, 0, 32, 40, 42.5, 45, 47.5, 50, 52.5, 55, 60, 70, 80};
 
-    for (float farenheit : farenheitValues)
+    for (double farenheit : farenheitValues)
     {
-        float celsiusWithValue = farenheitToCelsiusWithValue(farenheit);
-        float celsiusWithExpression = farenheitToCelsiusWithExpression(farenheit);
+        double celsiusWithValue = farenheitToCelsiusWithValue(farenheit);
+        double celsiusWithExpression = farenheitToCelsiusWithExpression(farenheit);
 
         bool isInsideToleranceInterval = validateTolerance(celsiusWithValue, celsiusWithExpression, tolerance);
 
@@ -22,20 +22,20 @@ int main()
     }
 }
 
-float farenheitToCelsiusWithValue(float farenheit)
+double farenheitToCelsiusWithValue(double farenheit)
 {
     return (farenheit - 32) * 0.55555555555;
 }
 
-float farenheitToCelsiusWithExpression(float farenheit)
+double farenheitToCelsiusWithExpression(double farenheit)
 {
     return (farenheit - 32) * 5 / 9;
 }
 
-bool validateTolerance(float value, float secondValue, float tolerance)
+bool validateTolerance(double value, double secondValue, double tolerance)
 {
-    float minValue = secondValue - tolerance;
-    float maxValue = secondValue + tolerance;
+    double minValue = secondValue - tolerance;
+    double maxValue = secondValue + tolerance;
 
     return value >= minValue && value <= maxValue;
 }
