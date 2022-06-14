@@ -9,18 +9,11 @@ void validateFloatingPointExecution(float);
 
 int main()
 {
-    validateFloatingPointExecution(0);
-    validateFloatingPointExecution(32);
-    validateFloatingPointExecution(40);
-    validateFloatingPointExecution(42.5);
-    validateFloatingPointExecution(45);
-    validateFloatingPointExecution(47.5);
-    validateFloatingPointExecution(50);
-    validateFloatingPointExecution(52.5);
-    validateFloatingPointExecution(55);
-    validateFloatingPointExecution(60);
-    validateFloatingPointExecution(70);
-    validateFloatingPointExecution(80);
+    float farenheitValues[] = {0, 32, 40, 42.5, 45, 47.5, 50, 52.5, 55, 60, 70, 80};
+    for (float farenheit : farenheitValues)
+    {
+        validateFloatingPointExecution(farenheit);
+    }
 }
 
 void validateFloatingPointExecution(float farenheit)
