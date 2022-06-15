@@ -3,7 +3,7 @@
 double farenheitToCelsiusWithValue(double);      // f: R -> R / f(x) = (x - 32) * 0.55555555555;
 double farenheitToCelsiusWithExpression(double); // f: R -> R / f(x) = (x - 32) * 5 / 9;
 
-bool validateTolerance(double, double, double); // f: R -> R / f(x, y, z) = x < y + z && x > y - z;
+bool validateTolerance(double, double, double); // f: R x R x R -> B / f(x, y, z) = y - z <= x <= y + z;
 
 int main()
 {
