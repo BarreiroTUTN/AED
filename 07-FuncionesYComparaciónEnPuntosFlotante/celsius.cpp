@@ -1,38 +1,56 @@
 #include <cassert>
 
-double farenheitToCelsiusWithValue(double);      // f: R -> R / f(x) = (x - 32) * 0.55555555555;
-double farenheitToCelsiusWithExpression(double); // f: R -> R / f(x) = (x - 32) * 5 / 9;
+double farenheitToCelsius(double); // f: R -> R / f(x) = (x - 32) * 5 / 9;
 
-bool validateTolerance(double, double, double); // f: R x R x R -> B / f(x, y, z) = y - z <= x <= y + z;
+bool AreNear(double, double, double); // f: R x R x R^+ -> B / f(x, y, z) = y - z <= x <= y + z;
+
+void transformToCelsiusAndValidate(double, double);
+
+void testAreNear();
+void testCelsius();
 
 int main()
 {
-    double tolerance = 0.000000001;
+    testAreNear();
 
-    double farenheitValues[] = {-25, -22.5, -20, -15, -10, -5, -1, 0, 32, 40, 42.5, 45, 47.5, 50, 52.5, 55, 60, 70, 80};
-
-    for (double farenheit : farenheitValues)
-    {
-        double celsiusWithValue = farenheitToCelsiusWithValue(farenheit);
-        double celsiusWithExpression = farenheitToCelsiusWithExpression(farenheit);
-
-        bool isInsideToleranceInterval = validateTolerance(celsiusWithValue, celsiusWithExpression, tolerance);
-
-        assert(isInsideToleranceInterval == true);
-    }
+    testCelsius();
 }
 
-double farenheitToCelsiusWithValue(double farenheit)
+void testAreNear()
 {
-    return (farenheit - 32) * 0.55555555555;
+    assert(AreNear(1, 1, 0.1));
+    assert(AreNear(1, 0, 1));
+    assert(AreNear(0, 1, 1));
+    assert(AreNear(0.5, 1, 1));
+    assert(AreNear(1, 0.5, 1));
+    assert(!AreNear(1, 2, 0.1));
+    assert(!AreNear(2, 1, 0.1));
 }
 
-double farenheitToCelsiusWithExpression(double farenheit)
+void testCelsius()
+{
+    transformToCelsiusAndValidate(32, 0);
+    transformToCelsiusAndValidate(75, 24);
+    transformToCelsiusAndValidate(40, 4);
+}
+
+void transformToCelsiusAndValidate(double farenheit, double correctCelsius)
+{
+    double tolerance = 1;
+
+    double celsius = farenheitToCelsius(farenheit);
+
+    bool isInsideToleranceInterval = AreNear(celsius, correctCelsius, tolerance);
+
+    assert(isInsideToleranceInterval);
+}
+
+double farenheitToCelsius(double farenheit)
 {
     return (farenheit - 32) * 5 / 9;
 }
 
-bool validateTolerance(double value, double secondValue, double tolerance)
+bool AreNear(double value, double secondValue, double tolerance = 0.001)
 {
     double minValue = secondValue - tolerance;
     double maxValue = secondValue + tolerance;
