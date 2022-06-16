@@ -19,10 +19,13 @@ int main()
 void testAreNear()
 {
     assert(AreNear(1, 1, 0.1));
-    assert(AreNear(1, 0, 1));
-    assert(AreNear(0, 1, 1));
+
+    assert(AreNear(1.5, 0, 1.5));
+    assert(AreNear(0, 1.5, 1.5));
+
     assert(AreNear(0.5, 1, 1));
     assert(AreNear(1, 0.5, 1));
+
     assert(!AreNear(1, 2, 0.1));
     assert(!AreNear(2, 1, 0.1));
 }
