@@ -1,6 +1,6 @@
 #include <cassert>
 
-double farenheitToCelsius(double); // f: R -> R / f(x) = (x - 32) * 5 / 9;
+double farenheitToCelsius(double); // f: R -> R / f(x) = 5 / 9 (x - 32);
 
 bool AreNear(double, double, double = 0.001);
 // f: R x R x R^+ -> B / f(x, y, z) =
