@@ -2,7 +2,10 @@
 
 double farenheitToCelsius(double); // f: R -> R / f(x) = (x - 32) * 5 / 9;
 
-bool AreNear(double, double, double); // f: R x R x R^+ -> B / f(x, y, z) = y - z <= x <= y + z;
+bool AreNear(double, double, double = 0.001);
+// f: R x R x R^+ -> B / f(x, y, z) =
+// V si y - z <= x <= y + z;
+// F si x < y - z, x > y + z;
 
 void transformToCelsiusAndValidate(double, double);
 
@@ -28,6 +31,14 @@ void testAreNear()
 
     assert(!AreNear(1, 2, 0.1));
     assert(!AreNear(2, 1, 0.1));
+
+    assert(AreNear(1, 1));
+
+    assert(!AreNear(1, 2));
+    assert(!AreNear(2, 1));
+
+    assert(AreNear(1, 1.001));
+    assert(AreNear(1.001, 1));
 }
 
 void testCelsius()
@@ -39,7 +50,7 @@ void testCelsius()
 
 void transformToCelsiusAndValidate(double farenheit, double correctCelsius)
 {
-    double tolerance = 1;
+    double tolerance = 0.5;
 
     double celsius = farenheitToCelsius(farenheit);
 
@@ -53,7 +64,7 @@ double farenheitToCelsius(double farenheit)
     return (farenheit - 32) * 5 / 9;
 }
 
-bool AreNear(double value, double secondValue, double tolerance = 0.001)
+bool AreNear(double value, double secondValue, double tolerance)
 {
     double minValue = secondValue - tolerance;
     double maxValue = secondValue + tolerance;
