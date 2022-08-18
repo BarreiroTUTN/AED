@@ -41,13 +41,13 @@ void testDistanceBetweenPoints()
 
 double distanceBetweenPoints(Point a, Point b)
 {
-    double distanceBetweenX = pow(a.x - b.x, 2);
+    double xDistance = pow(a.x - b.x, 2);
 
-    double distanceBetweenY = pow(a.y - b.y, 2);
+    double yDistance = pow(a.y - b.y, 2);
 
-    double distanceBetweenZ = pow(a.z - b.z, 2);
+    double zDistance = pow(a.z - b.z, 2);
 
-    return sqrt(distanceBetweenX + distanceBetweenY + distanceBetweenZ);
+    return sqrt(xDistance + yDistance + zDistance);
 }
 
 bool AreNear(double value, double secondValue, double tolerance)
