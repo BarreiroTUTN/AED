@@ -1,34 +1,36 @@
 #include <map>
 #include <iostream>
 #include <array>
+#include <fstream>
 
 using namespace std;
 
 int main()
 {
-    int vendedor[12]{};
+    int vendedor{};
 
     map<int, array<int, 12>> regions;
 
-    int r{};
-    for (cout << "Inserte número de región: "; cin >> r; cout << "Inserte número de región: ")
+    ifstream in;
+    in.open("importes_copy.txt", ios::in);
+
+    int mes;
+    int data;
+    for (int vendedor{}; in >> vendedor >> mes >> data;)
     {
-        cout << "Inserte número de vendedor: ";
+        regions.insert(std::pair<int, array<int, 12>>(vendedor, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}));
+        regions.at(vendedor).at(mes) += data;
+    }
 
-        int vendedor;
-        cin >> vendedor;
+    cout << "Printing";
 
-        cout << "Inserte mes: ";
-        int mes;
-        cin >> mes;
+    for (map<int, array<int, 12>>::iterator it = regions.begin(); it != regions.end(); ++it)
+    {
+        cout << "Vendedor: " << it->first << "\n";
 
-        cout << "Inserte importe neto: ";
-        int data;
-        cin >> data;
-
-        if (regions.at(r))
+        for (int i{}; i < 12; i++)
         {
-            regions.emplace(r, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0});
+            cout << it->second.at(i) << "\n";
         }
     }
 }
